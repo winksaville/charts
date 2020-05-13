@@ -541,7 +541,7 @@ class NumericTickProvider extends BaseTickProvider<num> {
   /// [number] of -63 returns -100
   /// [number] of 0.63 returns 1
   static double _getEnclosingPowerOfTen(num number) {
-    if (number == 0) {
+    if (number == 0 || number.isNaN || number.isInfinite) {
       return 1.0;
     }
 
@@ -551,7 +551,7 @@ class NumericTickProvider extends BaseTickProvider<num> {
 
   /// Returns the step numerically less than the number by step increments.
   static double _getStepLessThan(double number, double stepSize) {
-    if (number == 0.0 || stepSize == 0.0) {
+    if (number == 0.0 || number.isNaN || number.isInfinite || stepSize == 0.0) {
       return 0.0;
     }
     return (stepSize > 0.0
